@@ -52,7 +52,9 @@ class App
         light2.translateY(-2);
         this.scene.add( light2 );
 
+        // For VR
         document.body.appendChild( VRButton.createButton( this.renderer ) );
+        this.renderer.xr.enabled = true;
 
         //this.add_cube();
         this.load_model();
