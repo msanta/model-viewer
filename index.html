@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<title>Model Viewer</title>
+		<style>
+			body { margin: 0; }
+		</style>
+	</head>
+	<body>
+
+        <div id="container">
+            <canvas id="render_canvas" ></canvas>
+            <div id="labels"></div>
+        </div>
+
+        <script type="importmap">
+			{
+				"imports": {
+					"three": "./three.module.min.js",
+                    "three/addons/": "./addons/"
+				}
+			}
+		</script>
+        
+    </body>
+
+    <script type="module">
+        import {App} from './app.js';
+        let app = new App();
+        app.initialise(document.getElementById('render_canvas'));
+    </script>
+
+</html>
