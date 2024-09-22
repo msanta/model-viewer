@@ -46,11 +46,14 @@ class App
         });
         this.controls = new OrbitControls( this.camera, this.renderer.domElement );
 
+        let ambient = new THREE.AmbientLight( 0xffffff);
+        this.scene.add(ambient);
+
         const light1 = new THREE.DirectionalLight( 0xffffff, 1 );
-        this.scene.add( light1 );
+        //this.scene.add( light1 );
         const light2 = new THREE.DirectionalLight( 0xffffff, 1 );
         light2.translateY(-2);
-        this.scene.add( light2 );
+        //this.scene.add( light2 );
 
         // For VR
         document.body.appendChild( VRButton.createButton( this.renderer ) );
@@ -78,10 +81,11 @@ class App
         // Load a glTF resource
         loader.load(
             // resource URL
-            'models/streams.glb',
+            'models/cave.glb',
             // called when the resource is loaded
             function ( gltf ) {
-                gltf.scene.position.set(0, -530, -550);
+                // gltf.scene.position.set(0, -530, -550);
+                gltf.scene.position.set(2, -1, 0);
                 self.scene.add( gltf.scene );
 
                 gltf.animations; // Array<THREE.AnimationClip>
