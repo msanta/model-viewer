@@ -78,10 +78,10 @@ class App
         // Load a glTF resource
         loader.load(
             // resource URL
-            'models/simple meshes.glb',
+            'models/streams.glb',
             // called when the resource is loaded
             function ( gltf ) {
-
+                gltf.scene.position.set(0, -530, -550);
                 self.scene.add( gltf.scene );
 
                 gltf.animations; // Array<THREE.AnimationClip>
@@ -100,7 +100,7 @@ class App
             // called when loading has errors
             function ( error ) {
 
-                console.log( 'An error happened' );
+                console.log( 'An error happened', error );
 
             }
         );
