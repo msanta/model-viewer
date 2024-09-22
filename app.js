@@ -18,6 +18,7 @@ class App
     #display_height;
 
     #cube; // temp for testing
+    loaded_mesh;
 
     constructor()
     {
@@ -60,7 +61,7 @@ class App
         this.renderer.xr.enabled = true;
 
         //this.add_cube();
-        this.load_model();
+        //this.load_model();
         this.camera.position.z = 5;
 
         this.renderer.setAnimationLoop( () => {self.animate() } );
@@ -74,7 +75,7 @@ class App
         this.scene.add( this.#cube );
     }
 
-    load_model()
+    load_modelOLD()
     {
         let loader = new GLTFLoader();
         let self = this;
@@ -109,6 +110,46 @@ class App
             }
         );
     }
+
+    load_model(fileurl)
+    {
+        let loader = new GLTFLoader();
+        let self = this;
+        // Load a glTF resource
+        loader.load(
+            // resource URL
+            fileurl,
+            // called when the resource is loaded
+            function ( gltf ) {
+                // gltf.scene.position.set(0, -530, -550);
+                // gltf.scene.position.set(2, -1, 0);
+                gltf.scene.position.set(-8, -3, 22); //va
+                self.scene.add( gltf.scene );
+                self.loaded_mesh = gltf.scene;
+                gltf.animations; // Array<THREE.AnimationClip>
+                gltf.scene; // THREE.Group
+                gltf.scenes; // Array<THREE.Group>
+                gltf.cameras; // Array<THREE.Camera>
+                gltf.asset; // Object
+                console.log('finished loading the model');
+                URL.revokeObjectURL(fileurl);
+            },
+            // called while loading is progressing
+            function ( xhr ) {
+
+                console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+
+            },
+            // called when loading has errors
+            function ( error ) {
+
+                console.log( 'An error happened', error );
+                URL.revokeObjectURL(fileurl);
+
+            }
+        );
+    }
+
 
     animate()
     {

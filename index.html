@@ -6,14 +6,29 @@
 		<title>Model Viewer</title>
 		<style>
 			body { margin: 0; }
+            .filebtn {
+                z-index: 100;
+                float: left;
+                display: inline;
+                position: absolute;
+            }
+            .canvas {
+                position: fixed;
+                left: 0px;
+                top: 0px;
+            }
 		</style>
+        <script src="./jszip/jszip.min.js"></script>
+        <script src="./jquery/jquery-3.7.0.min.js"></script>
 	</head>
 	<body>
 
         <div id="container">
-            <canvas id="render_canvas" ></canvas>
+            <canvas id="render_canvas" class="canvas"></canvas>
             <div id="labels"></div>
         </div>
+
+        <input type="file" accept=".glb" id="project_browser" class="filebtn">
 
         <script type="importmap">
 			{
@@ -30,6 +45,17 @@
         import {App} from './app.js';
         let app = new App();
         app.initialise(document.getElementById('render_canvas'));
+
+        $('#project_browser').on('change', project_file_selected);
+        async function project_file_selected()
+        {
+            let el = $('#project_browser').get(0);
+            if (!el.files.length) return; 
+            let file = el.files[0];
+            let fileurl = URL.createObjectURL(file);
+            app.load_model(fileurl);
+        }
+
     </script>
 
 </html>
