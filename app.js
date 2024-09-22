@@ -28,7 +28,7 @@ class App
     initialise(canvas_el)
     {
         this.scene = new THREE.Scene();
-        this.scene.background = new THREE.Color(1,1,1);
+        this.scene.background = new THREE.Color(0.5, 0.5, 0.5);
 		this.camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
         this.renderer = new THREE.WebGLRenderer({canvas: canvas_el});
